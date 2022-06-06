@@ -15,32 +15,57 @@ class ArrayOfString {
 }
 
 class ArrayOfAnything<T> {
-    constructor(public collection: T[]) { }
-    
-    get(index: number): T {
-        return this.collection[index];
-    }
+  constructor(public collection: T[]) {}
+
+  get(index: number): T {
+    return this.collection[index];
+  }
 }
 
-new ArrayOfAnything<string>(['a', 'b', 'c']);
-
+new ArrayOfAnything<string>(["a", "b", "c"]);
 
 // const printStrings = (arr : string[]) => {
-//     for (let i = 0; i < arr.length; i++) { 
+//     for (let i = 0; i < arr.length; i++) {
 //         console.log(arr[i]);
 //     }
-// } 
+// }
 
 // const printNumbers = (arr: number[]) => {
-//     for (let i = 0; i < arr.length; i++) { 
+//     for (let i = 0; i < arr.length; i++) {
 //         console.log(arr[i]);
 //     }
-// } 
+// }
 
 function printAnything<T>(arr: T[]): void {
-    for (let i = 0; i < arr.length; i++) { 
-        console.log(arr[i]);
-    }
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
 }
 
-printAnything<string>(['a', 'b', 'c']);
+printAnything<string>(["a", "b", "c"]);
+
+// Generics Contraints
+
+class House {
+  print() {
+    console.log("House");
+  }
+}
+
+class Car {
+  print() {
+    console.log("Car");
+  }
+}
+
+interface Printable { 
+  print(): void;
+}
+
+function printHouseOrCar<T extends Printable >(arr: T[]): void {
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].print();
+  }
+}
+
+printHouseOrCar([new House(), new Car()]); 
